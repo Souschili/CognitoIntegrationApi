@@ -6,18 +6,19 @@ using Amazon.Runtime.CredentialManagement;
 
 namespace ServicesLayer.Helpers
 {
-    internal static class CognitoClientFacrtory
+    //Todo add logger
+    internal static class CognitoClientFactory
     {
         private static AmazonCognitoIdentityProviderClient _client;
-        private static readonly object _lock = new object();
-        // temp
+        private static readonly object _lockClient = new object();
+        // always same name
         static private readonly string _path = Path.Combine(Directory.GetCurrentDirectory(), "credential");
 
         public static AmazonCognitoIdentityProviderClient GetClient()
         {
             if (_client != null)
                 return _client;
-            lock (_lock)
+            lock (_lockClient)
             {
                 var chain = new CredentialProfileStoreChain(_path);
 
