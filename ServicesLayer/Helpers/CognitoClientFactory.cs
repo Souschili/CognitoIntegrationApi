@@ -7,7 +7,7 @@ using Amazon.Runtime.CredentialManagement;
 namespace ServicesLayer.Helpers
 {
     //Todo add logger
-    internal static class CognitoClientFactory
+    public static class CognitoClientFactory
     {
         private static AmazonCognitoIdentityProviderClient _client;
         private static readonly object _lockClient = new object();
