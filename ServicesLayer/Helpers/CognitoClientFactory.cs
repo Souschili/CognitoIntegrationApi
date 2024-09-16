@@ -6,7 +6,7 @@ using Amazon.Runtime.CredentialManagement;
 
 namespace ServicesLayer.Helpers
 {
-    //Todo add logger
+    [Obsolete("This factory is obsolete and will be removed in a future version. Use the AddAmazonServices method for dependency injection.")]
     public static class CognitoClientFactory
     {
         private static AmazonCognitoIdentityProviderClient _client;

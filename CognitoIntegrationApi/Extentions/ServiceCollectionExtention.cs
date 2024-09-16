@@ -18,7 +18,7 @@ namespace CognitoIntegrationApi.Extentions
                                  throw new AmazonClientException("Unable read AWS credentials");
                 return _client;
             });
-            
+
             return services;
         }
     }
