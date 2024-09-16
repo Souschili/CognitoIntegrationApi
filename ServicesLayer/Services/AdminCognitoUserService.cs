@@ -1,4 +1,7 @@
-﻿using ServicesLayer.DTOs;
+﻿using Amazon.CognitoIdentityProvider;
+using Amazon.CognitoIdentityProvider.Model;
+using ServicesLayer.DTOs;
+using ServicesLayer.Helpers;
 using ServicesLayer.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -10,8 +13,27 @@ namespace ServicesLayer.Services
 {
     internal class AdminCognitoUserService : IAdminCognitoUserService
     {
-        public Task AdminSetPasswordAsync(string userName, string password)
+        private readonly AmazonCognitoIdentityProviderClient _client;
+        //// temp 
+        private readonly string poolid = "us-east-1_x3HcsF0z4";
+
+
+        public AdminCognitoUserService()
         {
+            _client=CognitoClientFactory.GetClient();
+        }
+
+        public async Task AdminSetPasswordAsync(string userName, string password)
+        {
+            //var setPassword = new AdminSetUserPasswordRequest
+            //{
+            //    Username = userName,
+            //    Password = password,
+            //    UserPoolId = poolid,
+            //    Permanent = true
+            //};
+
+            //await 
             throw new NotImplementedException();
         }
 
