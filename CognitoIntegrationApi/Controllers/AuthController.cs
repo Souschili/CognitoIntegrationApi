@@ -3,6 +3,7 @@ using Amazon.CognitoIdentityProvider.Model;
 using Amazon.Runtime.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServicesLayer.DTOs;
 using ServicesLayer.Helpers;
 
 namespace CognitoIntegrationApi.Controllers
@@ -19,7 +20,7 @@ namespace CognitoIntegrationApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUpUser()
+        public async Task<IActionResult> SignUpUser(SignUpRequestDto signUpRequest)
         {
             const string poolId = "us-east-1_x3HcsF0z4";
             //DTO fields

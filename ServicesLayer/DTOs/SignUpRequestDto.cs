@@ -1,5 +1,4 @@
-﻿
-namespace ServicesLayer.DTOs
+﻿namespace ServicesLayer.DTOs
 {
     public record class SignUpRequestDto(
         string Name,

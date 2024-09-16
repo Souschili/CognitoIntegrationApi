@@ -10,8 +10,4 @@
     <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="3.7.403.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
