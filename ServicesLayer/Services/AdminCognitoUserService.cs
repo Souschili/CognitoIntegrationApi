@@ -1,13 +1,7 @@
 ﻿using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
 using ServicesLayer.DTOs;
-using ServicesLayer.Helpers;
 using ServicesLayer.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServicesLayer.Services
 {
@@ -21,7 +15,6 @@ namespace ServicesLayer.Services
         public AdminCognitoUserService(AmazonCognitoIdentityProviderClient client)
         {
             _client = client;
-            //_client = CognitoClientFactory.GetClient();
         }
 
         public async Task AdminSetPasswordAsync(string userName, string password)
@@ -80,8 +73,7 @@ namespace ServicesLayer.Services
             // set permanent password
             await AdminSetPasswordAsync(signUpRequest.Name,signUpRequest.Password);
 
-            // temp
-            throw new NotImplementedException();
+           
         }
     }
 }
