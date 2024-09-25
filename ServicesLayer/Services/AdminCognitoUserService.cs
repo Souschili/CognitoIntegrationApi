@@ -14,13 +14,14 @@ namespace ServicesLayer.Services
     internal class AdminCognitoUserService : IAdminCognitoUserService
     {
         private readonly AmazonCognitoIdentityProviderClient _client;
-        //// temp 
+        // temp 
         private readonly string poolid = "us-east-1_x3HcsF0z4";
 
 
-        public AdminCognitoUserService()
+        public AdminCognitoUserService(AmazonCognitoIdentityProviderClient client)
         {
-            _client = CognitoClientFactory.GetClient();
+            _client = client;
+            //_client = CognitoClientFactory.GetClient();
         }
 
         public async Task AdminSetPasswordAsync(string userName, string password)
@@ -37,7 +38,7 @@ namespace ServicesLayer.Services
 
         }
 
-        public Task AdminSignUpUserAsync(SignUpRequestDto signUpRequest)
+        public async Task AdminSignUpUserAsync(SignUpRequestDto signUpRequest)
         {
             List<AttributeType> attributes = new()
             {
@@ -61,6 +62,25 @@ namespace ServicesLayer.Services
                        Value="true"
                    }
             };
+
+            var adminCreaterequest = new AdminCreateUserRequest
+            {
+                Username = signUpRequest.Name,
+                TemporaryPassword = signUpRequest.Password,
+                MessageAction = MessageActionType.SUPPRESS,
+                DesiredDeliveryMediums = { "EMAIL" },
+                ForceAliasCreation = false,
+                UserPoolId = poolid,
+                UserAttributes = attributes,
+            };
+
+            await _client.AdminCreateUserAsync(adminCreaterequest);
+
+           
+            // set permanent password
+            await AdminSetPasswordAsync(signUpRequest.Name,signUpRequest.Password);
+
+            // temp
             throw new NotImplementedException();
         }
     }
