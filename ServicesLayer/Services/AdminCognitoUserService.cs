@@ -20,25 +20,47 @@ namespace ServicesLayer.Services
 
         public AdminCognitoUserService()
         {
-            _client=CognitoClientFactory.GetClient();
+            _client = CognitoClientFactory.GetClient();
         }
 
         public async Task AdminSetPasswordAsync(string userName, string password)
         {
-            //var setPassword = new AdminSetUserPasswordRequest
-            //{
-            //    Username = userName,
-            //    Password = password,
-            //    UserPoolId = poolid,
-            //    Permanent = true
-            //};
+            var setPasswordRequest = new AdminSetUserPasswordRequest
+            {
+                Username = userName,
+                Password = password,
+                UserPoolId = poolid,
+                Permanent = true
+            };
 
-            //await 
-            throw new NotImplementedException();
+            var setPasswordResponce = await _client.AdminSetUserPasswordAsync(setPasswordRequest);
+
         }
 
         public Task AdminSignUpUserAsync(SignUpRequestDto signUpRequest)
         {
+            List<AttributeType> attributes = new()
+            {
+                 new AttributeType
+                {
+                     Name = "email",
+                    Value=signUpRequest.Email
+                },
+                new AttributeType
+                {
+                    Name="phone_number",
+                    Value=signUpRequest.Phone
+                },
+                 new AttributeType{
+                      Name= "email_verified",
+                      Value= "true"
+                   },
+                   new AttributeType
+                   {
+                       Name="phone_number_verified",
+                       Value="true"
+                   }
+            };
             throw new NotImplementedException();
         }
     }
