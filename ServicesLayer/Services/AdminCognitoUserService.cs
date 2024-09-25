@@ -5,7 +5,7 @@ using ServicesLayer.Services.Contracts;
 
 namespace ServicesLayer.Services
 {
-    internal class AdminCognitoUserService : IAdminCognitoUserService
+    public class AdminCognitoUserService : IAdminCognitoUserService
     {
         private readonly AmazonCognitoIdentityProviderClient _client;
         // temp 
@@ -69,11 +69,11 @@ namespace ServicesLayer.Services
 
             await _client.AdminCreateUserAsync(adminCreaterequest);
 
-           
-            // set permanent password
-            await AdminSetPasswordAsync(signUpRequest.Name,signUpRequest.Password);
 
-           
+            // set permanent password
+            await AdminSetPasswordAsync(signUpRequest.Name, signUpRequest.Password);
+
+
         }
     }
 }

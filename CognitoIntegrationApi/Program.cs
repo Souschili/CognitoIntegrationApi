@@ -1,4 +1,4 @@
-using CognitoIntegrationApi.Extentions;
+using ServicesLayer;
 
 namespace CognitoIntegrationApi
 {
@@ -9,7 +9,8 @@ namespace CognitoIntegrationApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AmazoneServices();
+            builder.Services.AddCognitoServices();
+            builder.Services.AddAmazonCognitoClient();
 
 
             builder.Services.AddControllers();
