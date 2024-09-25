@@ -19,8 +19,9 @@ namespace CognitoIntegrationApi.Controllers
             _client=CognitoClientFactory.GetClient();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SignUpUser(SignUpRequestDto signUpRequest)
+        //TODO: remove
+        [HttpPost("Demo")]
+        public async Task<IActionResult> SignUpUserDemo(SignUpRequestDto signUpRequest)
         {
             const string poolId = "us-east-1_x3HcsF0z4";
             //DTO fields
@@ -80,6 +81,13 @@ namespace CognitoIntegrationApi.Controllers
             await _client.AdminSetUserPasswordAsync(passrequest);   
 
             return Ok(signUpResponce);
+        }
+
+        [HttpPost]
+        public IActionResult SignUp(SignUpRequestDto requestDto)
+        {
+
+            return Ok(requestDto);
         }
     }
 }
