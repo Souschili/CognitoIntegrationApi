@@ -1,10 +1,8 @@
 ﻿using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
-using Amazon.Runtime.Internal;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServicesLayer.DTOs;
-using ServicesLayer.Helpers;
+using ServicesLayer.Services.Contracts;
 
 namespace CognitoIntegrationApi.Controllers
 {
@@ -12,11 +10,11 @@ namespace CognitoIntegrationApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly AmazonCognitoIdentityProviderClient _client;
+        private readonly IAdminCognitoUserService _adminCognitoService;
 
-        public AuthController()
+        public AuthController(IAdminCognitoUserService adminCognitoService)
         {
-            _client=CognitoClientFactory.GetClient();
+            _adminCognitoService = adminCognitoService;
         }
 
         //TODO: remove
@@ -84,10 +82,18 @@ namespace CognitoIntegrationApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUp(SignUpRequestDto requestDto)
+        public async Task<IActionResult> SignUp(SignUpRequestDto requestDto)
         {
-
-            return Ok(requestDto);
+            try
+            {
+                await _adminCognitoService.AdminSignUpUserAsync(requestDto);
+                return Ok(requestDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }
