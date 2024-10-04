@@ -31,6 +31,11 @@ namespace ServicesLayer.Services
 
         }
 
+        public Task AdminSignInUserAsync(SignInRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task AdminSignUpUserAsync(SignUpRequestDto signUpRequest)
         {
             List<AttributeType> attributes = new()
