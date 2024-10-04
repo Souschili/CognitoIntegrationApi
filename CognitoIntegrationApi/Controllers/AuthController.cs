@@ -17,7 +17,14 @@ namespace CognitoIntegrationApi.Controllers
             _adminCognitoService = adminCognitoService;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
+        public IActionResult SignIn()
+        {
+            return Ok();
+        }
+
+
+        [HttpPost("registration")]
         public async Task<IActionResult> SignUp(SignUpRequestDto requestDto)
         {
             try
